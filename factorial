@@ -1,18 +1,20 @@
 #include <iostream>
 using namespace std;
+#defined int long long
 
 int fact[100005];
+int mod = (int) (1e9+7);
 void preComputerFactorial(){
     fact[0] = 1;
-    int[ans] = 1;
+    int ans = 1;
     for(int i = 1; i<=100005; i++){
-        ans = ans * i;
+        ans = (ans * i)%mod;
         fact[i] = ans;
     }
 }
 
 int nCr (int n, int r){
-    return fact[n] / fact[r] * fact[n-r]);
+    return fact[n] / (fact[r] * fact[n-r]);
 }
 
 void testCaseNcR(){
@@ -21,12 +23,12 @@ void testCaseNcR(){
     cin >> t;
     while(t--){
         int n, r;
-        cin>>n>>r;
-        cout<<ncr(n,r)<<endl;
+        cin >> n >> r;
+        cout << ncr(n,r) << endl;
     }
 }
 
-int main() {
-    cout << "GfG";
+signed main() {
+    cout<<"GfG!";
     return 0;
 }
