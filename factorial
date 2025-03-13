@@ -2,19 +2,36 @@
 using namespace std;
 #defined int long long
 
-int fact[100005];
+int fact[100005],power[100005];
 int mod = (int) (1e9+7);
+
+int power(int base, int n, int mod){
+    int ans = 1;
+    while(n){
+        if( n % 2) {
+            n = n - 1;
+            ans = (ans * base) % mod;
+        }
+        else{
+            n = n/2;
+            base=(base * base) % mod;
+        }
+    }
+    return ans;
+}
+
 void preComputerFactorial(){
     fact[0] = 1;
     int ans = 1;
     for(int i = 1; i<=100005; i++){
         ans = (ans * i)%mod;
         fact[i] = ans;
+        power[i] = power(fact[i], mod-2, mod);
     }
 }
 
 int nCr (int n, int r){
-    return fact[n] / (fact[r] * fact[n-r]);
+    return (fact[n] * (power[r](fact[r], mod-2, mod) * power(fact[n-r], mod-2, mod))%mod)%mod;
 }
 
 void testCaseNcR(){
@@ -24,7 +41,7 @@ void testCaseNcR(){
     while(t--){
         int n, r;
         cin >> n >> r;
-        cout << ncr(n,r) << endl;
+        cout << nCr(n,r) << endl;
     }
 }
 
