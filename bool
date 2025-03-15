@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+#defined int long long
+
+int fact[100005],power[100005];
+int mod = (int) (1e9+7);
+
+int power(int base, int n, int mod){
+    int ans = 1;
+    while(n){
+        if( n % 2) {
+            n = n - 1;
+            ans = (ans * base) % mod;
+        }
+        else{
+            n = n/2;
+            base=(base * base) % mod;
+        }
+    }
+    return ans;
+}
+
+void preComputerFactorial(){
+    fact[0] = 1;
+    int ans = 1;
+    for(int i = 1; i<=100005; i++){
+        ans = (ans * i)%mod;
+        fact[i] = ans;
+        power[i] = power(fact[i], mod-2, mod);
+    }
+}
+
+int nCr (int n, int r){
+    return (fact[n] * (power[r] power[n-r])%mod)%mod;
+}
+
+void testCaseNcR(){
+    preComputerFactorial()
+    int t;
+    cin >> t;
+    while(t--){
+        int n, r;
+        cin >> n >> r;
+        cout << nCr(n,r) << endl;
+    }
+}
+
+// print all the combinations that sum up to N
+void printCombo(int n, vector<int> &vec){
+  if(n==0){
+     for(auto it: vec) cout << it <<"";
+
+     return;
+  }
+  for(int i = 1;i<=n;i++){
+      vec.push_back(i);
+      printCombo(n=i, vec);
+      vec.pop_back();
+  }
+}
+
+void pickNotPick(int ind,int sum, vector<int> &ds){
+    if(ind == n){
+       id(sum == 0){
+         for(auto it : ds) cout << it <<"";
+         cout << endl;
+   }
+   return;
+}
+
+//pick condition only if a[i] <= sum
+if(a[i] <= sum){
+  ds.push_back(a[i]);
+  pickNotPick(ind+1, sum - a[ind], ds);
+  ds.pop_back();
+}
+
+//not pick
+pickNotPick(ind-1, sum, ds);
+}
+
+void printPermutations(int ind, string s, map<int,int> &map){
+     if(ind == n){
+     cout << s << endl;
+
+     return;
+}
+
+for(int i = 0;i<n;i++){
+   if(hash[i] ==0){
+      hash[i] = 1;
+      s += str[i];
+printPermutations(ind+1, s, mpp);
+mpp[i] = 0;
+s.pop_back();
+}
+}
+}
