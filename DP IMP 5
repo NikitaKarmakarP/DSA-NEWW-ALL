@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std;
+
+double coins(int ind, int H){
+    if(ind==n){
+        if(H > (n-H)) return 1.0;
+        else return 0.0;
+    }
+    if(dp[ind][H] != -1) return dp[ind][H];
+    
+    return dp[ind][H] = (prob[ind] * coins(ind+1, H+1)) + ((double)(1.0-prob[ind]) * coins(ind-1, H))   //-> make sure probability arrays double data type;
+}
